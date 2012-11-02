@@ -1,11 +1,47 @@
 SampleApp::Application.routes.draw do
-  get "initial_pages/home"
 
-  get "initial_pages/help"
+  get "users/new"
 
-  get "initial_pages/about"
+  # Enable Rails REST-style URI's for users
+  # HTTP    URI         Action      Named            Purpose
+  # request                         route
+  # GET   /users        index   users_path page   to list all users
+  # GET   /users/1      show    user_path(user)   page to show user
+  # GET   /users/new    new     new_user_path     page to make a new user (signup)
+  # POST  /users        create  users_path        create a new user
+  # GET   /users/1/edit edit    edit_user_path(user) page to edit user with id 1
+  # PUT   /users/1      update  user_path(user)   update user
+  # DELETE /users/1     destroy user_path(user)   delete user
+  #
+  # resources   :users
 
-  get "initial_pages/contact"
+  # get "initial_pages/home"
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  #
+  root to: 'initial_pages#home'
+  #
+  # Above creates:
+  # root_path => '/'
+  # root_url => 'http://localhost:3000/'
+  #
+  match '/signup',  to: 'users#new'
+  #
+  # get "initial_pages/help"
+  # get "initial_pages/about"
+  # get "initial_pages/contact"
+  # Above replaced with what is following:
+  #
+  match '/help',    to: 'initial_pages#help'
+  match '/about',   to: 'initial_pages#about'
+  match '/contact', to: 'initial_pages#contact'
+  #
+  # The above automaticall creates help_path, about_path, 
+  # and contact_path.
+  # Automatically creates named routes, example:
+  # about_path => '/about'
+  # about_url => 'http://localhost:3000/about
+  # 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -53,10 +89,6 @@ SampleApp::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
