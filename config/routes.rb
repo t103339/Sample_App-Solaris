@@ -1,6 +1,7 @@
 SampleApp::Application.routes.draw do
 
-  get "users/new"
+  #get "users/new"
+  resources :users
 
   # Enable Rails REST-style URI's for users
   # HTTP    URI         Action      Named            Purpose

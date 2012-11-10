@@ -66,6 +66,17 @@ describe User do
      it { should be_invalid }
    end
 
+   describe "when email address stored " do
+     before { @user.email = "FOO@EXAMPLE.COM"
+              @user.save
+            }
+     it "should be saved as all lower-case" do
+        find_user=User.find_by_email("foo@example.com")
+        find_user.should_not == nil
+     end
+
+   end
+
    describe "when email address is not unique" do
      before do
        user_with_same_email = @user.dup
