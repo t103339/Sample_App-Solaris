@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   #before_save { |user| user.email = email.downcase }
   before_save { self.email.downcase! }
 
+  before_save :create_remember_token
+
   validates( :name, presence: true, 
                     length: { maximum: 50 }
            )
@@ -28,5 +30,16 @@ class User < ActiveRecord::Base
 
   validates( :password, length: { minimum: 6 })
   validates( :password_confirmation, presence: true)
+
+  private # Only internal user needs access to following code.
+
+     def create_remember_token
+       # Using the urlsafe-base64 method from the SecureRandom module
+       # in the Ruby standard library, creates a Base64 string safe 
+       # for use in URIs, hence safe for use in cookies.
+       # Returns a random string of length 16 composed of A-Z, a-z, 0-9,
+       # - and _.
+       self.remember_token = SecureRandom.urlsafe_base64
+     end
 
 end
