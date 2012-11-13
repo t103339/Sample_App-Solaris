@@ -2,10 +2,11 @@ SampleApp::Application.routes.draw do
 
   #get "users/new"
   resources :users
-
+  #
   # Enable Rails REST-style URI's for users
   # HTTP    URI         Action      Named            Purpose
   # request                         route
+  #
   # GET   /users        index   users_path page   to list all users
   # GET   /users/1      show    user_path(user)   page to show user
   # GET   /users/new    new     new_user_path     page to make a new user (signup)
@@ -14,7 +15,12 @@ SampleApp::Application.routes.draw do
   # PUT   /users/1      update  user_path(user)   update user
   # DELETE /users/1     destroy user_path(user)   delete user
   #
-  # resources   :users
+  resources :sessions, only: [:new, :create, :destroy]
+  #
+  # Enable Rails REST-style URI's for sessions
+  # GET    /signin    signin_path    new page for a new session (signin)
+  # POST   /sessions  sessions_path  create create a new session
+  # DELETE /signout   signout_path   destroy delete a session (sign out)
 
   # get "initial_pages/home"
   # You can have the root of your site routed with "root"
@@ -27,6 +33,9 @@ SampleApp::Application.routes.draw do
   # root_url => 'http://localhost:3000/'
   #
   match '/signup',  to: 'users#new'
+  #
+  match '/signin',   to: 'sessions#new'
+  match '/signout',  to: 'sessions#destroy', via: :delete
   #
   # get "initial_pages/help"
   # get "initial_pages/about"
