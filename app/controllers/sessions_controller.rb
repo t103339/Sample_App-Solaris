@@ -8,11 +8,13 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:session][:email])
 
     if user && user.authenticate(params[:session][:password])
+      #
       # user is in the database and the password for this
       # user authenticates:
-      #
       sign_in user
-      redirect_to user
+      #
+      # redirect_back if originally trying to access a protected page.
+      redirect_back_or user
       #
     else
       # Something is afoul, not quite right

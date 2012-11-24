@@ -1,0 +1,20 @@
+Run options: include {:full_description=>/index\ page/}
+...Name: Person 1\nName: Person 2\nName: Person 3\nName: Person 4\nName: Person 5\nName: Person 6\nName: Person 7\nName: Person 8\nName: Person 9\nName: Person 10\nName: Person 14\nF
+
+Failures:
+
+  1) UserPages index page pagination should list each user
+     Failure/Error: page.should have_selector('li', text: user.name)
+       expected css "li" with text "Person 14" to return something
+     # ./spec/requests/user_pages_spec.rb:36:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/user_pages_spec.rb:34:in `block (4 levels) in <top (required)>'
+
+Finished in 0.60728 seconds
+4 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:33 # UserPages index page pagination should list each user
+
+Randomized with seed 24512
+

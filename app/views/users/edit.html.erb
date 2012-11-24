@@ -1,0 +1,18 @@
+
+<% provide(:title, 'Edit user') %>
+
+<h1>Update your profile</h1>
+
+<div class="row">
+
+   <div class="span6 offset3">
+
+      <%= render partial: "shared/user_data_input_fields", 
+                 locals: { button_function: "Save changes" } %>
+
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails">change</a>
+
+   </div>
+
+</div>

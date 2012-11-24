@@ -16,9 +16,11 @@ describe User do
    it { should respond_to(:password) }
    it { should respond_to(:password_confirmation) }
    it { should respond_to(:remember_token) }
+   it { should respond_to(:admin) }
    it { should respond_to(:authenticate) }
 
    it { should be_valid }
+   it { should_not be_admin }
 
    describe "when name is not present" do
      before { @user.name = " " }
@@ -43,6 +45,12 @@ describe User do
    describe "when password confirmation is nil" do
      before { @user.password_confirmation = nil }
      it { should_not be_valid }
+   end
+
+   describe "with admin attribute set to 'true'" do
+     # before { @user.toggle!(:admin) }
+     before { @user.admin=true }
+     it { should be_admin }
    end
 
    describe "return value of authenticate method" do
